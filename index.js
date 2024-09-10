@@ -25,15 +25,15 @@ const mockQueryFields = (fields) => {
 const mockScalarField = (fieldName) => {
   switch (fieldName.toLowerCase()) {
     case "id":
-      return faker.random.uuid();
+      return faker.string.uuid();
     case "name":
-      return faker.name.findName();
+      return faker.person.fullName();
     case "email":
       return faker.internet.email();
     case "age":
-      return faker.datatype.number({ min: 18, max: 99 });
+      return faker.number.int({ min: 18, max: 99 });
     default:
-      return faker.lorem.word();
+      return faker.word.sample();
   }
 };
 

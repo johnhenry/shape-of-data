@@ -43,11 +43,28 @@ test("CLI generates mock data for a GraphQL file", async (t) => {
 
 test("CLI handles errors gracefully", async (t) => {
   // Test with a non-existent file
-  const { stderr } = await execAsync("node cli.js non_existent_file.graphql");
-  assert.ok(stderr.includes("Error:"));
+  try {
+    await execAsync("node cli.js non_existent_file.graphql");
+    assert.fail("Expected an error to be thrown");
+  } catch (error) {
+    assert.strictEqual(error.code, 1);
+    assert.ok(
+      error.stderr.includes("Error: File not found - non_existent_file.graphql")
+    );
+  }
 });
 
 test("CLI shows usage information when no file is provided", async (t) => {
-  const { stderr } = await execAsync("node cli.js");
-  assert.ok(stderr.includes("Please provide a GraphQL file as an argument."));
+  try {
+    await execAsync("node cli.js");
+    assert.fail("Expected an error to be thrown");
+  } catch (error) {
+    assert.strictEqual(error.code, 1);
+    assert.ok(
+      error.stderr.includes("Usage: node cli.js <path-to-graphql-file>")
+    );
+    assert.ok(
+      error.stderr.includes("Please provide a GraphQL file as an argument.")
+    );
+  }
 });

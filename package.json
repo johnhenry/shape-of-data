@@ -17,8 +17,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "graphql-tag": "^2.12.6",
-    "@snaplet/copycat": "^0.15.1"
+    "@snaplet/copycat": "^0.15.1",
+    "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
     "@types/node": "^18.0.0"
