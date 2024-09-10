@@ -4,6 +4,9 @@
   "description": "A library to transform GraphQL queries into mock data",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "mock-ql-sculptor": "./cli.js"
+  },
   "scripts": {
     "test": "node --test",
     "start": "node cli.js"
