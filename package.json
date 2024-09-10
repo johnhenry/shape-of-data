@@ -1,6 +1,6 @@
 {
   "name": "mock-ql-sculptor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library to transform GraphQL queries into mock data",
   "main": "index.js",
   "type": "module",
