@@ -1,4 +1,4 @@
-# Declarative AI Application template
+# Declarative AI Application Template
 
 This repository is a template for creating Declarative AI Applications.
 It consists of a template (`.pr.md`) file and associated instructions (`.instruct.md`) that instructs an LLM how to use the template.
