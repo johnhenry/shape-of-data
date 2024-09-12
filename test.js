@@ -90,3 +90,26 @@ test("generateMockData handles number type with min and max", async (t) => {
     assert.ok(typeof user.name === "string");
   });
 });
+
+test("generateMockData handles date type with min and max", async (t) => {
+  const query = `
+    query {
+      users {
+        birthdate(date:{min:"2024-09-06T13:25:14Z", max:"2024-11-06T13:25:14Z"})
+        name
+      }
+    }
+  `;
+
+  const result = generateMockData(query);
+
+  assert.ok(Array.isArray(result.users));
+  result.users.forEach((user) => {
+    const birthdate = new Date(user.birthdate);
+    const minDate = new Date("2024-09-06T13:25:14Z");
+    const maxDate = new Date("2024-11-06T13:25:14Z");
+    assert.ok(birthdate instanceof Date && !isNaN(birthdate));
+    assert.ok(birthdate >= minDate && birthdate <= maxDate);
+    assert.ok(typeof user.name === "string");
+  });
+});

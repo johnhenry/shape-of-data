@@ -30,14 +30,16 @@ const mockQueryFields = (fields) => {
     } else {
       const numberArg = args?.find((arg) => arg.name.value === "number")?.value
         .fields;
-      result[name.value] = mockScalarField(name.value, numberArg);
+      const dateArg = args?.find((arg) => arg.name.value === "date")?.value
+        .fields;
+      result[name.value] = mockScalarField(name.value, numberArg, dateArg);
     }
   }
 
   return result;
 };
 
-const mockScalarField = (fieldName, numberArg) => {
+const mockScalarField = (fieldName, numberArg, dateArg) => {
   if (numberArg) {
     const min = numberArg.find((f) => f.name.value === "min")?.value.value;
     const max = numberArg.find((f) => f.name.value === "max")?.value.value;
@@ -49,6 +51,16 @@ const mockScalarField = (fieldName, numberArg) => {
     } else {
       return faker.number.int({ min, max });
     }
+  }
+
+  if (dateArg) {
+    const min = new Date(
+      dateArg.find((f) => f.name.value === "min")?.value.value
+    );
+    const max = new Date(
+      dateArg.find((f) => f.name.value === "max")?.value.value
+    );
+    return faker.date.between({ from: min, to: max }).toISOString();
   }
 
   switch (fieldName.toLowerCase()) {
